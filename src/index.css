@@ -12,10 +12,11 @@ code {
     monospace;
 }
 
-.weather-info {
-   padding: 20px;
-   border: 1px solid #eee;
-   background-color: #ccc;
-   color: #000;
 
+h1{
+  margin-top: 50px;
+}
+
+info-temperature {
+   size: 14px;
 }
