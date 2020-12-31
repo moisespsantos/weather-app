@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Form, Button, Jumbotron } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Jumbotron, Alert } from "react-bootstrap";
 import { getWeatherInfo } from "./../Api";
 
 export default class WeatherApp extends Component {
@@ -15,6 +15,10 @@ export default class WeatherApp extends Component {
      handleChangeInput = async ({ target }) => {
           const { name, value } = target;
 
+          // const {REACT_API_ACCESS_KEY} = process.env;
+
+          // console.log(process.env.REACT_APP_API_WEATHER_ACCESS_KEY);
+
           this.setState({
                [name]: value,
           });
@@ -29,11 +33,21 @@ export default class WeatherApp extends Component {
 
      render() {
           const { city, weather } = this.state;
+
           return (
                <Container>
                     <Row>
                          <Col>
-                              <h1>Temperature of the world!</h1>
+                              <Alert variant="default">
+                                   <Alert.Heading>
+                                        Buscar temperatura
+                                   </Alert.Heading>
+                                   <p>
+                                       Entre com o nome da cidade para saber as informações sobre a metereologia!
+                                   </p>
+                                   <hr />
+                              </Alert>
+
                               <Form.Group controlId="formBasicEmail">
                                    <Form.Control
                                         type="text"
@@ -48,7 +62,7 @@ export default class WeatherApp extends Component {
                                    type="submit"
                                    onClick={this.searchApi}
                               >
-                                   Submit
+                                   Search
                               </Button>
 
                               <hr />
@@ -56,9 +70,10 @@ export default class WeatherApp extends Component {
                               {weather && weather.current ? (
                                    <Jumbotron fluid>
                                         <Container>
-                                             <h1 className="info-temperature">
-                                                 Temperature - {weather.current.temperature}
-                                             </h1>
+                                             <h2 className="info-temperature">
+                                                  Temperature -{" "}
+                                                  {weather.current.temperature}
+                                             </h2>
                                              <p>
                                                   {weather.location.name} -{" "}
                                                   {weather.location.timezone_id}{" "}
@@ -75,7 +90,7 @@ export default class WeatherApp extends Component {
                                         </Container>
                                    </Jumbotron>
                               ) : (
-                              <p>{""}</p>
+                                   <p>{""}</p>
                               )}
                          </Col>
                     </Row>
